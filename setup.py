@@ -1,63 +1,42 @@
 import os
-
-from setuptools import setup
-
-
-def rel(*xs):
-    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *xs)
+from distutils.core import setup
 
 
-with open(rel("django_dramatiq", "__init__.py"), "r") as f:
-    version_marker = "__version__ = "
-    for line in f:
-        if line.startswith(version_marker):
-            _, version = line.split(version_marker)
-            version = version.strip().strip('"')
-            break
-    else:
-        raise RuntimeError("Version marker not found.")
+def read_file_into_string(filename):
+    path = os.path.abspath(os.path.dirname(__file__))
+    filepath = os.path.join(path, filename)
+    try:
+        return open(filepath).read()
+    except IOError:
+        return ''
+
+
+def get_readme():
+    for name in ('README', 'README.rst', 'README.md'):
+        if os.path.exists(name):
+            return read_file_into_string(name)
+    return ''
 
 
 setup(
-    name="django_dramatiq",
-    version=version,
-    description="A Django app for Dramatiq.",
-    long_description="Visit https://github.com/Bogdanp/django_dramatiq for more information.",
-    packages=[
-        "django_dramatiq",
-        "django_dramatiq.management",
-        "django_dramatiq.management.commands",
-        "django_dramatiq.migrations",
-    ],
-    install_requires=[
-        "django>=3.2",
-        "dramatiq>=1.11",
-    ],
+    name='kb-django-dramatiq',
+    packages=['tests', 'tests.testapp2', 'tests.testapp2.migrations', 'tests.testapp1', 'tests.testapp1.migrations', 'tests.testapp3', 'tests.testapp3.tasks', 'tests.testapp3.tasks.utils', 'tests.testapp3.migrations', 'django_dramatiq', 'django_dramatiq.migrations', 'django_dramatiq.management', 'django_dramatiq.management.commands'],
+    version='0.0.07',
+    description='django_dramatiq',
+    author='Patrick Kimber',
+    author_email='patrick@kbsoftware.co.uk',
+    url='git@github.com:pkimber/django_dramatiq.git',
     classifiers=[
-        "Environment :: Web Environment",
-        "Operating System :: OS Independent",
-        "Framework :: Django",
-        "Framework :: Django :: 3.2",
-        "Framework :: Django :: 4.1",
-        "Framework :: Django :: 4.2",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
+        'Development Status :: 1 - Planning',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Framework :: Django :: 1.8',
+        'Topic :: Office/Business :: Scheduling',
     ],
-    extras_require={
-        "dev": [
-            "bumpversion",
-            "flake8",
-            "flake8-quotes",
-            "isort",
-            "pytest",
-            "pytest-cov",
-            "pytest-django",
-            "twine",
-        ]
-    },
-    python_requires=">=3.8",
-    include_package_data=True,
+    long_description=get_readme(),
 )

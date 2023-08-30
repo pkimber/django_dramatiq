@@ -1,4 +1,8 @@
-include LICENSE.txt
-include README.rst
-include setup.cfg
-include setup.py
+
+include LICENSE
+include README
+include requirements/*.txt
+include *.ttf
+include *.txt
+
+prune examples/

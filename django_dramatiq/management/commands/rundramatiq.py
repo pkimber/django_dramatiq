@@ -217,4 +217,7 @@ class Command(BaseCommand):
                 exec_path = os.path.join(d, exec_name)
                 if os.path.isfile(exec_path):
                     return exec_path
+            # fall back to default behaviour (from earlier versions)
+            # ref https://github.com/Bogdanp/django_dramatiq/issues/109
+            return os.path.join(bin_dir, exec_name)
         return exec_name

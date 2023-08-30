@@ -21,7 +21,7 @@ def get_readme():
 setup(
     name='kb-django-dramatiq',
     packages=['tests', 'tests.testapp2', 'tests.testapp2.migrations', 'tests.testapp1', 'tests.testapp1.migrations', 'tests.testapp3', 'tests.testapp3.tasks', 'tests.testapp3.tasks.utils', 'tests.testapp3.migrations', 'django_dramatiq', 'django_dramatiq.migrations', 'django_dramatiq.management', 'django_dramatiq.management.commands'],
-    version='0.0.07',
+    version='0.0.08',
     description='django_dramatiq',
     author='Patrick Kimber',
     author_email='patrick@kbsoftware.co.uk',

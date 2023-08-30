@@ -1,0 +1,6 @@
+attrs
+GitPython
+PyYAML
+rich
+semantic-version
+walkdir
